@@ -1,0 +1,6 @@
+git clone https://github.com/Raven179-1111/animal-hub1.git
+cd animal-hub1
+echo "# Animal Hub" > README.md
+git add README.md
+git commit -m "Initial commit with README"
+git push origin main
