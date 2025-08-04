@@ -120,5 +120,73 @@
   </footer>
 </body>
 </html>
+<!-- Блок товарів -->
+<section id="products">
+  <h2>Товари для тварин</h2>
+  <div class="product-list">
+    <div class="product-item" data-name="Корм для котів" data-price="250">
+      <img src="https://example.com/cat-food.jpg" alt="Корм для котів" width="200" />
+      <h3>Корм для котів</h3>
+      <p>Ціна: 250 грн</p>
+      <button onclick="openOrderForm('Корм для котів', 250)">Замовити</button>
+    </div>
+    <div class="product-item" data-name="Іграшка для собак" data-price="150">
+      <img src="https://example.com/dog-toy.jpg" alt="Іграшка для собак" width="200" />
+      <h3>Іграшка для собак</h3>
+      <p>Ціна: 150 грн</p>
+      <button onclick="openOrderForm('Іграшка для собак', 150)">Замовити</button>
+    </div>
+    <!-- Додай свої товари тут -->
+  </div>
+</section>
+
+<!-- Форма замовлення (спочатку прихована) -->
+<div id="orderForm" style="display:none; position:fixed; top:10%; left:50%; transform:translateX(-50%);
+  background:#fff; padding:20px; border:1px solid #ccc; z-index:1000;">
+  <h3>Оформити замовлення</h3>
+  <form id="formOrder" onsubmit="submitOrder(event)">
+    <p>Товар: <span id="productName"></span></p>
+    <p>Ціна: <span id="productPrice"></span> грн</p>
+    <input type="hidden" name="product" id="inputProduct" />
+    <input type="hidden" name="price" id="inputPrice" />
+    <p><label>Ім'я:<br/><input type="text" name="name" required /></label></p>
+    <p><label>Телефон:<br/><input type="tel" name="phone" required /></label></p>
+    <p><label>Адреса доставки:<br/><textarea name="address" required></textarea></label></p>
+    <p><button type="submit">Відправити замовлення</button> <button type="button" onclick="closeOrderForm()">Скасувати</button></p>
+  </form>
+</div>
+
+<script>
+  function openOrderForm(name, price) {
+    document.getElementById('productName').textContent = name;
+    document.getElementById('productPrice').textContent = price;
+    document.getElementById('inputProduct').value = name;
+    document.getElementById('inputPrice').value = price;
+    document.getElementById('orderForm').style.display = 'block';
+  }
+
+  function closeOrderForm() {
+    document.getElementById('orderForm').style.display = 'none';
+  }
+
+  // Надіслати замовлення (тимчасово просто виводить в консоль)
+  function submitOrder(event) {
+    event.preventDefault();
+    const form = event.target;
+    const data = {
+      product: form.product.value,
+      price: form.price.value,
+      name: form.name.value,
+      phone: form.phone.value,
+      address: form.address.value
+    };
+    console.log('Замовлення:', data);
+    alert('Дякуємо! Ваше замовлення прийнято. Ми з вами зв\'яжемось.');
+    form.reset();
+    closeOrderForm();
+
+    // Тут потрібно додати код для відправки на email або у Telegram
+  }
+</script>
 
     
